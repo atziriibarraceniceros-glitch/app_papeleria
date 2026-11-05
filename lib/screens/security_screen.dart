@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 
-class SecurityScreen extends StatelessWidget {
+class SecurityScreen extends StatefulWidget {
   const SecurityScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SecurityScreen> createState() => _SecurityScreenState();
+}
+
+class _SecurityScreenState extends State<SecurityScreen> {
+  // Variable para guardar el estado real del interruptor de 2FA
+  bool dosFactores = false;
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +108,11 @@ class SecurityScreen extends StatelessWidget {
                     leading: const Icon(Icons.security, color: PastelColors.lavenderPrimary),
                     title: const Text('Autenticación de dos factores', style: TextStyle(fontWeight: FontWeight.w600)),
                     trailing: Switch(
-                      value: false,
+                      value: dosFactores,
                       onChanged: (bool value) {
+                        setState(() {
+                          dosFactores = value;
+                        });
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
