@@ -1,4 +1,5 @@
 import '../screens/profile_screen.dart';
+import '../screens/security_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 
@@ -100,13 +101,13 @@ class ProfileDrawer extends StatelessWidget {
                 );
               }),
 
-              // 2. SEGURIDAD Y CONTRASEÑA
+             // 2. SEGURIDAD Y CONTRASEÑA
               _buildDrawerOption(Icons.lock_outline, 'Seguridad y Contraseña', () {
-                Navigator.pop(context);
-                // TODO: Cuando crees tu pantalla de seguridad, descomenta esta línea:
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => const SecurityScreen()));
-                
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Abriendo apartado: Seguridad y Contraseña')));
+                Navigator.pop(context); // Cierra el menú lateral
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SecurityScreen()),
+                );
               }),
 
               // 3. NOTIFICACIONES Y ALERTAS
