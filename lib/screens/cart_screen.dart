@@ -2,8 +2,35 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../widgets/profile_drawer.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  // Lista mutable de productos en el carrito para poder eliminarlos en tiempo real
+  final List> _cartItems = [
+    {
+      'name': 'Cuaderno Profesional Rayas 100 Hojas',
+      'sku': 'SKU: CDN-100R',
+      'subtotal': '\$97.00',
+      'qty': 'Cant: 2',
+    },
+    {
+      'name': 'Bolígrafo Gel Retráctil 0.7mm Negro Pack',
+      'sku': 'SKU: BOL-GEL07',
+      'subtotal': '\$66.00',
+      'qty': 'Cant: 3',
+    },
+    {
+      'name': 'Marcadores Resaltadores Pastel Set 6 pzs',
+      'sku': 'SKU: RES-PAS06',
+      'subtotal': '\$98.00',
+      'qty': 'Cant: 1',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,28 +70,43 @@ class CartScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            _buildCartItem('Cuaderno Profesional Rayas 100 Hojas', 'SKU: CDN-100R', '\$97.00', 'Cant: 2', context),
-            _buildCartItem('Bolígrafo Gel Retráctil 0.7mm Negro Pack', 'SKU: BOL-GEL07', '\$66.00', 'Cant: 3', context),
-            _buildCartItem('Marcadores Resaltadores Pastel Set 6 pzs', 'SKU: RES-PAS06', '\$98.00', 'Cant: 1', context),
+            
+            // SI LA LISTA ESTÁ VACÍA, MUESTRA UN MENSAJE
+            if (_cartItems.isEmpty)
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 40),
+                child: Center(
+                  child: Text('El carrito está vacío', style: TextStyle(fontSize: 14, color: PastelColors.textMuted, fontWeight: FontWeight.bold)),
+                ),
+              )
+            else
+              // DIBUJA CADA PRODUCTO DE LA LISTA DINÁMICAMENTE
+              ..._cartItems.map((item) => _buildCartItem(
+                    item['name']!,
+                    item['sku']!,
+                    item['subtotal']!,
+                    item['qty']!,
+                  )),
+
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: Column(
                 children: [
-                  _buildSummaryRow('Subtotal', '\$261.00'),
+                  _buildSummaryRow('Subtotal', _cartItems.isEmpty ? '\$0.00' : '\$261.00'),
                   const SizedBox(height: 8),
-                  _buildSummaryRow('IVA (16%)', '\$41.76'),
+                  _buildSummaryRow('IVA (16%)', _cartItems.isEmpty ? '\$0.00' : '\$41.76'),
                   const SizedBox(height: 8),
-                  _buildSummaryRow('Descuento de Temporada (-5%)', '-\$13.05', textColor: PastelColors.mintSuccess),
+                  _buildSummaryRow('Descuento de Temporada (-5%)', _cartItems.isEmpty ? '\$0.00' : '-\$13.05', textColor: PastelColors.mintSuccess),
                   const Divider(height: 24),
-                  _buildSummaryRow('Total a Pagar', '\$289.71', isTotal: true),
+                  _buildSummaryRow('Total a Pagar', _cartItems.isEmpty ? '\$0.00' : '\$289.71', isTotal: true),
                 ],
               ),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {
+              onPressed: _cartItems.isEmpty ? null : () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('¡Pago procesado con éxito!')),
                 );
@@ -91,7 +133,7 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCartItem(String name, String sku, String subtotal, String qty, BuildContext context) {
+  Widget _buildCartItem(String name, String sku, String subtotal, String qty) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
@@ -129,8 +171,12 @@ class CartScreen extends StatelessWidget {
           const SizedBox(height: 10),
           InkWell(
             onTap: () {
+              // ACCIÓN DE ELIMINAR EL PRODUCTO EN TIEMPO REAL
+              setState(() {
+                _cartItems.removeWhere((item) => item['name'] == name);
+              });
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Se eliminó $name del carrito')),
+                SnackBar(content: Text('Se eliminó "$name" del carrito')),
               );
             },
             child: Container(
