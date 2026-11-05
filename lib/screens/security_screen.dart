@@ -101,7 +101,18 @@ class SecurityScreen extends StatelessWidget {
                     title: const Text('Autenticación de dos factores', style: TextStyle(fontWeight: FontWeight.w600)),
                     trailing: Switch(
                       value: false,
-                      onChanged: (val) {},
+                      onChanged: (bool value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              value 
+                                ? 'Autenticación de dos factores activada' 
+                                : 'Autenticación de dos factores desactivada'
+                            ),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      },
                       activeColor: PastelColors.lavenderPrimary,
                     ),
                   ),
