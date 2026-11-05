@@ -10,8 +10,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  // Lista mutable de productos en el carrito para poder eliminarlos en tiempo real
-  final List> _cartItems = [
+  // Lista mutable con tipo inferido automáticamente
+  final _cartItems = [
     {
       'name': 'Cuaderno Profesional Rayas 100 Hojas',
       'sku': 'SKU: CDN-100R',
