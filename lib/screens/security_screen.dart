@@ -34,7 +34,65 @@ class SecurityScreen extends StatelessWidget {
                     title: const Text('Cambiar contraseña', style: TextStyle(fontWeight: FontWeight.w600)),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
                     onTap: () {
-                      // Acción para cambiar contraseña
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            title: const Text(
+                              'Cambiar Contraseña',
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: PastelColors.textDark),
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                TextField(
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    labelText: 'Contraseña Actual',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                                TextField(
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    labelText: 'Nueva Contraseña',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                                TextField(
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    labelText: 'Confirmar Nueva Contraseña',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('Cancelar', style: TextStyle(color: PastelColors.textMuted)),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Contraseña actualizada con éxito')),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: PastelColors.lavenderPrimary,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                ),
+                                child: const Text('Guardar', style: TextStyle(color: Colors.white)),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                   const Divider(),
