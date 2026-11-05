@@ -1,3 +1,4 @@
+import '../screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 
@@ -89,14 +90,40 @@ class ProfileDrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
+              
+              // 1. MI PERFIL
               _buildDrawerOption(Icons.person_outline, 'Mi Perfil', () {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Función: Mi Perfil')));
+                Navigator.pop(context); // Cierra el menú lateral
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                );
               }),
-              _buildDrawerOption(Icons.lock_outline, 'Seguridad y Contraseña', () {}),
-              _buildDrawerOption(Icons.notifications_none, 'Notificaciones y Alertas', () {}),
+
+              // 2. SEGURIDAD Y CONTRASEÑA
+              _buildDrawerOption(Icons.lock_outline, 'Seguridad y Contraseña', () {
+                Navigator.pop(context);
+                // TODO: Cuando crees tu pantalla de seguridad, descomenta esta línea:
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => const SecurityScreen()));
+                
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Abriendo apartado: Seguridad y Contraseña')));
+              }),
+
+              // 3. NOTIFICACIONES Y ALERTAS
+              _buildDrawerOption(Icons.notifications_none, 'Notificaciones y Alertas', () {
+                Navigator.pop(context);
+                // TODO: Cuando crees tu pantalla de notificaciones, descomenta esta línea:
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationsScreen()));
+                
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Abriendo apartado: Notificaciones y Alertas')));
+              }),
+
               const Spacer(),
+              
+              // 4. CERRAR SESIÓN
               ElevatedButton.icon(
                 onPressed: () {
+                  Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, '/login');
                 },
                 icon: const Icon(Icons.logout, color: PastelColors.coralDanger),
