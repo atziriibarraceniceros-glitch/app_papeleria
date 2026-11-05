@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../widgets/profile_drawer.dart';
+import 'checkout_screen.dart'; // <-- Asegúrate de importar la pantalla de pago
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -107,8 +108,9 @@ class _CartScreenState extends State<CartScreen> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _cartItems.isEmpty ? null : () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('¡Pago procesado con éxito!')),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CheckoutScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
