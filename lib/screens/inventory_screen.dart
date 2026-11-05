@@ -131,7 +131,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
               decoration: InputDecoration(
                 hintText: 'Buscar por producto, marca o SKU...',
                 prefixIcon: const Icon(Icons.search, color: PastelColors.textMuted),
-                suffixIcon: IconButton(icon: const Icon(Icons.qr_code_scanner, color: PastelColors.lavenderPrimary), onPressed: () {}),
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
