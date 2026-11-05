@@ -94,7 +94,6 @@ class ProfileDrawer extends StatelessWidget {
               }),
               _buildDrawerOption(Icons.lock_outline, 'Seguridad y Contraseña', () {}),
               _buildDrawerOption(Icons.notifications_none, 'Notificaciones y Alertas', () {}),
-              _buildDrawerOption(Icons.storefront_outlined, 'Cambiar de Sucursal', () {}),
               const Spacer(),
               ElevatedButton.icon(
                 onPressed: () {
