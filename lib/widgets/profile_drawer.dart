@@ -2,6 +2,7 @@ import '../screens/profile_screen.dart';
 import '../screens/security_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
+import '../screens/notifications_screen.dart';
 
 class ProfileDrawer extends StatelessWidget {
   const ProfileDrawer({Key? key}) : super(key: key);
@@ -111,15 +112,18 @@ class ProfileDrawer extends StatelessWidget {
               }),
 
               // 3. NOTIFICACIONES Y ALERTAS
-              _buildDrawerOption(Icons.notifications_none, 'Notificaciones y Alertas', () {
-                Navigator.pop(context);
-                // TODO: Cuando crees tu pantalla de notificaciones, descomenta esta línea:
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationsScreen()));
-                
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Abriendo apartado: Notificaciones y Alertas')));
-              }),
-
-              const Spacer(),
+              _buildDrawerOption(
+               Icons.notifications_none, 
+               'Notificaciones y Alertas', 
+                () {
+              Navigator.pop(context);
+              Navigator.push(
+               context,
+              MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+    );
+  },
+),
+             
               
               // 4. CERRAR SESIÓN
               ElevatedButton.icon(
