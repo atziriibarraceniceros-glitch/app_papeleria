@@ -324,6 +324,9 @@ class _InventoryScreenState extends State<InventoryScreen> {
   }
 
   Widget _buildProductCard(String title, String sku, String price, String stock, Color badgeBg, Color badgeColor) {
+    // Verificamos si el producto está agotado para deshabilitar o cambiar la acción del botón de comprar
+    final bool isAgotado = stock.contains('0 u. Agotado');
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
@@ -353,10 +356,46 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(price, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: PastelColors.lavenderPrimary)),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(color: badgeBg, borderRadius: BorderRadius.circular(12)),
-                      child: Text(stock, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: badgeColor)),
+                    
+                    // CONTENEDOR CON EL ESTADO Y EL NUEVO BOTÓN DE COMPRAR / AGREGAR
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(color: badgeBg, borderRadius: BorderRadius.circular(12)),
+                          child: Text(stock, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: badgeColor)),
+                        ),
+                        const SizedBox(width: 8),
+                        InkWell(
+                          onTap: isAgotado ? null : () {
+                            // ACCIÓN DEL BOTÓN DE COMPRAR / AGREGAR AL CARRITO
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Se agregó "$title" al carrito')),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: isAgotado ? Colors.grey[200] : PastelColors.mintLight,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.add_shopping_cart, size: 14, color: isAgotado ? Colors.grey : PastelColors.mintSuccess),
+                                const SizedBox(width: 4),
+                                Text(
+                                  'Comprar', 
+                                  style: TextStyle(
+                                    fontSize: 11, 
+                                    fontWeight: FontWeight.bold, 
+                                    color: isAgotado ? Colors.grey : PastelColors.mintSuccess,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -379,6 +418,7 @@ class _FinancialRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    otherWidgets:
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
