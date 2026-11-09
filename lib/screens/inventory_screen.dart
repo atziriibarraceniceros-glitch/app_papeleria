@@ -324,7 +324,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
   }
 
   Widget _buildProductCard(String title, String sku, String price, String stock, Color badgeBg, Color badgeColor, String imagePath) {
-    // Verificamos si el producto está agotado para deshabilitar o cambiar la acción del botón de comprar
     final bool isAgotado = stock.contains('0 u. Agotado');
 
     return Container(
@@ -338,22 +337,22 @@ class _InventoryScreenState extends State<InventoryScreen> {
       child: Row(
         children: [
           Container(
-  width: 54,
-  height: 54,
-  decoration: BoxDecoration(
-    color: PastelColors.surfaceSubtle,
-    borderRadius: BorderRadius.circular(12),
-  ),
-  child: ClipRRect(
-    borderRadius: BorderRadius.circular(12),
-    child: Image.asset(
-      imagePath,
-      width: 54,
-      height: 54,
-      fit: BoxFit.cover,
-    ),
-  ),
-),
+            width: 54,
+            height: 54,
+            decoration: BoxDecoration(
+              color: PastelColors.surfaceSubtle,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                imagePath,
+                width: 54,
+                height: 54,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
@@ -367,8 +366,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(price, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: PastelColors.lavenderPrimary)),
-                    
-                    // CONTENEDOR CON EL ESTADO Y EL NUEVO BOTÓN DE COMPRAR / AGREGAR
                     Row(
                       children: [
                         Container(
@@ -379,7 +376,6 @@ class _InventoryScreenState extends State<InventoryScreen> {
                         const SizedBox(width: 8),
                         InkWell(
                           onTap: isAgotado ? null : () {
-                            // ACCIÓN DEL BOTÓN DE COMPRAR / AGREGAR AL CARRITO
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Se agregó "$title" al carrito')),
                             );
@@ -429,7 +425,6 @@ class _FinancialRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    otherWidgets:
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
