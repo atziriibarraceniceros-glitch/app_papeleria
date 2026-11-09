@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 
 class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({Key? key}) : super(key: key);
+  const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CheckoutScreen extends StatelessWidget {
               width: 90,
               height: 90,
               decoration: BoxDecoration(
-                color: const Color(0xFF8B7CF6).withOpacity(0.12),
+                color: const Color(0xFF8B7CF6).withValues(alpha: 0.12), // <-- Corregido aquí
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.credit_card, size: 45, color: Color(0xFF8B7CF6)),

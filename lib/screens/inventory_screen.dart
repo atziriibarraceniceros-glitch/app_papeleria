@@ -3,7 +3,7 @@ import '../constants/colors.dart';
 import '../widgets/profile_drawer.dart';
 
 class InventoryScreen extends StatefulWidget {
-  const InventoryScreen({Key? key}) : super(key: key);
+  const InventoryScreen({super.key}); // <-- Actualizado a super.key
 
   @override
   State<InventoryScreen> createState() => _InventoryScreenState();
@@ -421,7 +421,7 @@ class _FinancialRow extends StatelessWidget {
   final String amount;
   final bool isProfit;
 
-  const _FinancialRow({Key? key, required this.label, required this.amount, this.isProfit = false}) : super(key: key);
+  const _FinancialRow({super.key, required this.label, required this.amount, this.isProfit = false});
 
   @override
   Widget build(BuildContext context) {

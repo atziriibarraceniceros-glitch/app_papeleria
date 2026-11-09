@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 
 class NotificationsScreen extends StatefulWidget {
-  const NotificationsScreen({Key? key}) : super(key: key);
+  const NotificationsScreen({super.key});
 
   @override
   State<NotificationsScreen> createState() => _NotificationsScreenState();
@@ -60,7 +60,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           ),
                         );
                       },
-                      activeColor: PastelColors.lavenderPrimary,
+                      activeThumbColor: PastelColors.lavenderPrimary, // <-- Actualizado
                     ),
                   ),
                   const Divider(),
@@ -85,7 +85,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           ),
                         );
                       },
-                      activeColor: PastelColors.lavenderPrimary,
+                      activeThumbColor: PastelColors.lavenderPrimary, // <-- Actualizado
                     ),
                   ),
                   const Divider(),
@@ -110,7 +110,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           ),
                         );
                       },
-                      activeColor: PastelColors.lavenderPrimary,
+                      activeThumbColor: PastelColors.lavenderPrimary, // <-- Actualizado
                     ),
                   ),
                 ],

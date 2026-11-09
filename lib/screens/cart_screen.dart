@@ -4,7 +4,7 @@ import '../widgets/profile_drawer.dart';
 import 'checkout_screen.dart'; // <-- Asegúrate de importar la pantalla de pago
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  const CartScreen({super.key});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -118,7 +118,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF8B7CF6).withOpacity(0.35),
+                    color: const Color(0xFF8B7CF6).withValues(alpha: 0.35), // <-- Corregido aquí
                     blurRadius: 16,
                     offset: const Offset(0, 8),
                   ),

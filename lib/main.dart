@@ -7,7 +7,7 @@ import 'screens/create_product_screen.dart';
 void main() => runApp(const PapelnovaApp());
 
 class PapelnovaApp extends StatelessWidget {
-  const PapelnovaApp({Key? key}) : super(key: key);
+  const PapelnovaApp({super.key});
 
   @override
   Widget build(BuildContext context) {

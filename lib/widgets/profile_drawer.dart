@@ -5,7 +5,7 @@ import '../constants/colors.dart';
 import '../screens/notifications_screen.dart';
 
 class ProfileDrawer extends StatelessWidget {
-  const ProfileDrawer({Key? key}) : super(key: key);
+  const ProfileDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {

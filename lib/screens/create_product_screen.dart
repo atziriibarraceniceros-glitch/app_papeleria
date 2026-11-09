@@ -3,7 +3,7 @@ import '../constants/colors.dart';
 import '../widgets/profile_drawer.dart';
 
 class CreateProductScreen extends StatefulWidget {
-  const CreateProductScreen({Key? key}) : super(key: key);
+  const CreateProductScreen({super.key});
 
   @override
   State<CreateProductScreen> createState() => _CreateProductScreenState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 
 class SecurityScreen extends StatefulWidget {
-  const SecurityScreen({Key? key}) : super(key: key);
+  const SecurityScreen({super.key});
 
   @override
   State<SecurityScreen> createState() => _SecurityScreenState();
@@ -124,7 +124,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                           ),
                         );
                       },
-                      activeColor: PastelColors.lavenderPrimary,
+                      activeThumbColor: PastelColors.lavenderPrimary, // <-- Actualizado aquí
                     ),
                   ),
                 ],
