@@ -106,29 +106,55 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: _cartItems.isEmpty ? null : () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CheckoutScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: PastelColors.lavenderPrimary,
-                minimumSize: const Size(double.infinity, 54),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.lock_outline, color: Colors.white, size: 20),
-                  SizedBox(width: 10),
-                  Text('Procesar Pago', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward, color: Colors.white, size: 20),
+            Container(
+              width: double.infinity,
+              height: 56,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF8B7CF6), Color(0xFFEC4899)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF8B7CF6).withOpacity(0.35),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
                 ],
               ),
-            ),
+              child: ElevatedButton(
+                onPressed: _cartItems.isEmpty ? null : () async {
+                  final pagado = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CheckoutScreen()),
+                  );
+                  if (pagado == true) {
+                    setState(() {
+                      _cartItems.clear();
+                    });
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.lock_outline, color: Colors.white, size: 20),
+                    SizedBox(width: 10),
+                    Text('Procesar Pago', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                    SizedBox(width: 8),
+                    Icon(Icons.arrow_forward, color: Colors.white, size: 20),
+                  ],
+                ),
+              ),
+            ),      
           ],
         ),
       ),
