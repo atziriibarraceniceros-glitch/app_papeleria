@@ -202,13 +202,13 @@ class _InventoryScreenState extends State<InventoryScreen> {
     if (_selectedCategory == 'Todos' || _selectedCategory == 'Cuadernos') {
       List<Widget> cuadernoCards = [];
       if (_statusFilter == 'todos' || _statusFilter == 'normal') {
-        cuadernoCards.add(_buildProductCard('Cuaderno Profesional Espiral Doble Cuadro 100 Hojas', 'SKU-CD-101', '\$48.50', '35 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess));
+        cuadernoCards.add(_buildProductCard('Cuaderno Profesional Espiral Doble Cuadro 100 Hojas', 'SKU-CD-101', '\$48.50', '35 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess, 'assets/images/cuaderno_doble_espiral.webp'));
       }
       if (_statusFilter == 'todos' || _statusFilter == 'bajo_stock') {
-        cuadernoCards.add(_buildProductCard('Libreta Pasta Dura Punteada Bullet Journal A5', 'SKU-BJ-442', '\$165.00', '¡Pocas existencias! (4 u.)', PastelColors.peachLight, PastelColors.peachWarning));
+        cuadernoCards.add(_buildProductCard('Libreta Pasta Dura Punteada Bullet Journal A5', 'SKU-BJ-442', '\$165.00', '¡Pocas existencias! (4 u.)', PastelColors.peachLight, PastelColors.peachWarning, 'assets/images/libreta_pasta_dura_punteada.webp'));
       }
       if (_statusFilter == 'todos' || _statusFilter == 'agotados') {
-        cuadernoCards.add(_buildProductCard('Cuaderno Francés Cosido Raya 96 Hojas', 'SKU-CF-089', '\$38.00', '0 u. Agotado', PastelColors.coralLight, PastelColors.coralDanger));
+        cuadernoCards.add(_buildProductCard('Cuaderno Francés Cosido Raya 96 Hojas', 'SKU-CF-089', '\$38.00', '0 u. Agotado', PastelColors.coralLight, PastelColors.coralDanger, 'assets/images/cuaderno_frances.webp'));
       }
       if (cuadernoCards.isNotEmpty) {
         widgets.add(const Text('CUADERNOS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: PastelColors.textDark)));
@@ -221,8 +221,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
     if (_selectedCategory == 'Todos' || _selectedCategory == 'Lápices y Plumas') {
       List<Widget> lapizCards = [];
       if (_statusFilter == 'todos' || _statusFilter == 'normal') {
-        lapizCards.add(_buildProductCard('Bolígrafo Gel Retráctil 0.7mm Negro Pack', 'SKU-BOL-GEL07', '\$66.00', '18 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess));
-        lapizCards.add(_buildProductCard('Lápiz de Grafito Mirado #2 Paquete 12 pzs', 'SKU-LAP-MIR2', '\$45.00', '22 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess));
+        lapizCards.add(_buildProductCard('Bolígrafo Gel Retráctil 0.7mm Negro Pack', 'SKU-BOL-GEL07', '\$66.00', '18 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess, 'assets/images/boligrafo_gel.webp'));
+        lapizCards.add(_buildProductCard('Lápiz de Grafito Mirado #2 Paquete 12 pzs', 'SKU-LAP-MIR2', '\$45.00', '22 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess, 'assets/images/lapiz_grafito.webp'));
       }
       if (lapizCards.isNotEmpty && _statusFilter != 'bajo_stock' && _statusFilter != 'agotados') {
         widgets.add(const Text('LÁPICES Y PLUMAS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: PastelColors.textDark)));
@@ -235,8 +235,8 @@ class _InventoryScreenState extends State<InventoryScreen> {
     if (_selectedCategory == 'Todos' || _selectedCategory == 'Colores') {
       List<Widget> colorCards = [];
       if (_statusFilter == 'todos' || _statusFilter == 'normal') {
-        colorCards.add(_buildProductCard('Colores de Madera Prismacolor Junior 24 Pzs', 'SKU-COL-PRI24', '\$185.00', '12 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess));
-        colorCards.add(_buildProductCard('Marcadores Resaltadores Pastel Set 6 pzs', 'SKU-RES-PAS06', '\$98.00', '8 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess));
+        colorCards.add(_buildProductCard('Colores de Madera Prismacolor Junior 24 Pzs', 'SKU-COL-PRI24', '\$185.00', '12 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess, 'assets/images/colores_madera.webp'));
+        colorCards.add(_buildProductCard('Marcadores Resaltadores Pastel Set 6 pzs', 'SKU-RES-PAS06', '\$98.00', '8 u. En Stock', PastelColors.mintLight, PastelColors.mintSuccess, 'assets/images/marcadores_color_pastel.webp'));
       }
       if (colorCards.isNotEmpty && _statusFilter != 'bajo_stock' && _statusFilter != 'agotados') {
         widgets.add(const Text('COLORES', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: PastelColors.textDark)));
@@ -323,7 +323,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
     );
   }
 
-  Widget _buildProductCard(String title, String sku, String price, String stock, Color badgeBg, Color badgeColor) {
+  Widget _buildProductCard(String title, String sku, String price, String stock, Color badgeBg, Color badgeColor, String imagePath) {
     // Verificamos si el producto está agotado para deshabilitar o cambiar la acción del botón de comprar
     final bool isAgotado = stock.contains('0 u. Agotado');
 
@@ -338,11 +338,22 @@ class _InventoryScreenState extends State<InventoryScreen> {
       child: Row(
         children: [
           Container(
-            width: 54,
-            height: 54,
-            decoration: BoxDecoration(color: PastelColors.surfaceSubtle, borderRadius: BorderRadius.circular(12)),
-            child: const Icon(Icons.menu_book, color: PastelColors.lavenderPrimary),
-          ),
+  width: 54,
+  height: 54,
+  decoration: BoxDecoration(
+    color: PastelColors.surfaceSubtle,
+    borderRadius: BorderRadius.circular(12),
+  ),
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(12),
+    child: Image.asset(
+      imagePath,
+      width: 54,
+      height: 54,
+      fit: BoxFit.cover,
+    ),
+  ),
+),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
